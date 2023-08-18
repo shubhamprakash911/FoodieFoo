@@ -1,0 +1,28 @@
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 20px;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+.recipe_item {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 5px 8px;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
