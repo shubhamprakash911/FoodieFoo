@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const authanticate = async (req, res, next) => {
   try {
-    const token = req.cookies("token");
+    const token = req.headers?.authorization?.split(" ")[1];
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     if (decoded) {
       req.body.userId = decoded.userId;

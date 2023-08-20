@@ -1,21 +1,23 @@
 require("dotenv").config();
 const express = require("express");
-const cookiesParser = require("cookie-parser");
+const cors = require("cors");
 const { connection } = require("./configs/connection");
 const { userRoute } = require("./routes/user.route");
+const { recipeRoute } = require("./routes/favouriteRecipe.route");
 
 const port = process.env.PORT || 8000;
 
 const app = express();
 
 app.use(express.json());
-app.use(cookiesParser());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("welcome to FoodieFoo backend api");
 });
 
 app.use("/user", userRoute);
+app.use("/recipe", recipeRoute);
 
 app.listen(port, async () => {
   try {

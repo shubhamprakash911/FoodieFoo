@@ -48,10 +48,12 @@ async function userLogin(req, res) {
             process.env.SECRET_KEY,
             { expiresIn: "7d" }
           );
-          res
-            .status(200)
-            .json({ status: true, token, msg: "Login successful", data: user });
-          res.cookie("token", token);
+          res.status(200).json({
+            status: true,
+            token,
+            msg: "Login successful",
+            username: user[0].username,
+          });
         } else {
           res.status(403).json({
             status: false,
