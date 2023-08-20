@@ -4,6 +4,7 @@ const FavouriteRecipeSchema = mongoose.Schema({
   recipe_id: Number,
   title: String,
   image: String,
+  userId: String,
 });
 
 const FavouriteRecipeModel = mongoose.model(

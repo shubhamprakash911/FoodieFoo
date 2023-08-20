@@ -29,7 +29,9 @@ async function addFavouriteRecipe(req, res) {
 
 async function getFavouriteRecipe(req, res) {
   try {
-    const recipeData = await FavouriteRecipeModel.find();
+    const recipeData = await FavouriteRecipeModel.find({
+      _id: req.body.userId,
+    });
     res
       .status(200)
       .json({ status: true, msg: "Succefully", recipes: recipeData });
