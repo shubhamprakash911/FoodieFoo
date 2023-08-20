@@ -1,0 +1,39 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap"); */
+.cont {
+  width: 95%;
+  margin: auto;
+}
+
+.cont h2 {
+  margin: 15px 0;
+}
+
+.cont .active {
+  background: linear-gradient(35deg, #494949, #313131);
+  color: #fff;
+}
+
+.cont img {
+  width: 70%;
+}
+
+.cont button {
+  padding: 1rem 2rem;
+  color: #313131;
+  background: #fff;
+  border: 2px solid #000;
+  font-weight: 600;
+  margin: 40px 12px;
+}
+
+.cont ul {
+  margin-left: 12px;
+}
+
+.cont li {
+  margin-bottom: 15px;
+}
+
+.cont p {
+  line-height: 30px;
+}

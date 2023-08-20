@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import "./Navbar.css"; // Import your CSS file for styling
 import { Link, NavLink } from "react-router-dom";
 
-const Navbar = ({ setSearch }) => {
+const Navbar = ({ setSearch, showSearch = true, isLogin }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
 
@@ -17,17 +17,19 @@ const Navbar = ({ setSearch }) => {
       <Link to="/" className="title">
         FoodieFoo
       </Link>
-      <form onSubmit={handleSubmit}>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <FaSearch size="1.6em" color="black" onClick={handleSubmit} />
-        </div>
-      </form>
+      {showSearch && (
+        <form onSubmit={handleSubmit}>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <FaSearch size="1.6em" color="black" onClick={handleSubmit} />
+          </div>
+        </form>
+      )}
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>
         <span></span>

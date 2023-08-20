@@ -3,9 +3,10 @@ import styles from "../pages/Home.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
-  const { id, image, title } = props;
+  const { id: recipe_id, image, title } = props;
   console.log(props);
 
   function handleAddFavourite() {
@@ -15,7 +16,7 @@ function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
           const res = await axios.post(
             "http://localhost:8000/recipe",
             {
-              recipe_id: id,
+              recipe_id,
               image,
               title,
             },
@@ -78,7 +79,9 @@ function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
               onClick={handleDelete}
             />
           )}
-          <button className={styles.btn}>View Recipe</button>
+          <Link to={`/recipe/${recipe_id}`} className={styles.btn}>
+            View Recipe
+          </Link>
         </div>
       </div>
       <ToastContainer />

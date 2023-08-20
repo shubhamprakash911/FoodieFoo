@@ -22,7 +22,7 @@ function HomePage({ isLogin, search, setSearch, loading, setLoading }) {
 
   return (
     <main className="home">
-      <Navbar search={search} setSearch={setSearch} />
+      <Navbar search={search} setSearch={setSearch} isLogin={isLogin} />
       {loading ? (
         <Loading />
       ) : (

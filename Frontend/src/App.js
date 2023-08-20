@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Favourite from "./pages/Favourite";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-import { useState } from "react";
+import ViewRecipe from "./pages/ViewRecipe";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -41,6 +42,7 @@ function App() {
         />
         <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/recipe/:id" element={<ViewRecipe />} />
       </Routes>
     </BrowserRouter>
   );
