@@ -6,8 +6,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
-  const { id: recipe_id, image, title } = props;
-  console.log(props);
+  const { id, image, title } = props;
+  const recipe_id = id ? id : props.recipe_id;
 
   function handleAddFavourite() {
     if (isLogin) {
@@ -24,7 +24,7 @@ function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
           );
 
           if (res.data.status) {
-            toast.success(res.data.msg);
+            toast.success(res.data.msg, { position: "bottom-left" });
           }
         } catch (error) {
           toast.error(error.response.data.msg);
@@ -49,7 +49,7 @@ function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
         setFavouriteRecipe((prevFavourite) =>
           prevFavourite.filter((e) => e.recipe_id !== props.recipe_id)
         );
-        toast.success(res.data.msg);
+        toast.success(res.data.msg, { position: "bottom-right" });
       } else {
         toast.error(res.data.msg);
       }

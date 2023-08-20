@@ -6,7 +6,7 @@ import Recipe from "../components/Recipe";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
-function Favourite({ loading, setLoading, setSearch, isLogin }) {
+function Favourite({ loading, setLoading, setSearch, isLogin, setIsLogin }) {
   const [favouriteRecipe, setFavouriteRecipe] = useState([]);
   const navigate = useNavigate();
 
@@ -32,7 +32,12 @@ function Favourite({ loading, setLoading, setSearch, isLogin }) {
 
   return (
     <main className="home">
-      <Navbar setSearch={setSearch} />
+      <Navbar
+        setSearch={setSearch}
+        isLogin={isLogin}
+        showSearch={false}
+        setIsLogin={setIsLogin}
+      />
       {loading ? (
         <Loading />
       ) : (

@@ -25,6 +25,7 @@ function App() {
               setSearch={setSearch}
               loading={loading}
               setLoading={setLoading}
+              setIsLogin={setIsLogin}
             />
           }
         />
@@ -37,12 +38,16 @@ function App() {
               loading={loading}
               setLoading={setLoading}
               isLogin={isLogin}
+              setIsLogin={setIsLogin}
             />
           }
         />
         <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/recipe/:id" element={<ViewRecipe />} />
+        <Route
+          path="/recipe/:id"
+          element={<ViewRecipe isLogin={isLogin} setIsLogin={setIsLogin} />}
+        />
       </Routes>
     </BrowserRouter>
   );

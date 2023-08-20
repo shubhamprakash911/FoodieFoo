@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import styles from "./ViewRecipe.module.css";
 import Navbar from "../components/Navbar";
 
-function ViewRecipe() {
+function ViewRecipe({ isLogin, setIsLogin }) {
   const [details, setDetails] = useState([]);
   const [activeTab, setActiveTab] = useState("instructions");
   console.log(details);
@@ -25,7 +25,7 @@ function ViewRecipe() {
 
   return (
     <main>
-      <Navbar showSearch={false} />
+      <Navbar showSearch={false} isLogin={isLogin} setIsLogin={setIsLogin} />
       <div className={styles.cont}>
         <div className={styles.cont2}>
           <h2>{details.title}</h2>

@@ -5,7 +5,14 @@ import Recipe from "../components/Recipe";
 import styles from "./Home.module.css";
 import Loading from "../components/Loading";
 
-function HomePage({ isLogin, search, setSearch, loading, setLoading }) {
+function HomePage({
+  isLogin,
+  search,
+  setSearch,
+  loading,
+  setLoading,
+  setIsLogin,
+}) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -22,7 +29,12 @@ function HomePage({ isLogin, search, setSearch, loading, setLoading }) {
 
   return (
     <main className="home">
-      <Navbar search={search} setSearch={setSearch} isLogin={isLogin} />
+      <Navbar
+        search={search}
+        setSearch={setSearch}
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+      />
       {loading ? (
         <Loading />
       ) : (
