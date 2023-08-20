@@ -78,7 +78,7 @@ nav .menu span {
 }
 
 @media (max-width: 780px) {
-  .search-bar {
+  nav form {
     margin: auto;
   }
   nav .menu {

@@ -3,32 +3,32 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import Recipe from "../components/Recipe";
 import styles from "./Home.module.css";
+import Loading from "../components/Loading";
 
-function HomePage() {
+function HomePage({ isLogin, search, setSearch, loading, setLoading }) {
   const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchRecipes() {
       setLoading(true);
       const res = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch/?apiKey=0cc27eb538ba4019aa9d3ee0b8bc8000`
+        `https://api.spoonacular.com/recipes/complexSearch/?apiKey=0cc27eb538ba4019aa9d3ee0b8bc8000&query=${search}`
       );
       setRecipes(res.data.results);
       setLoading(false);
     }
     fetchRecipes();
-  }, []);
+  }, [search, setLoading]);
 
   return (
     <main className="home">
-      <Navbar />
+      <Navbar search={search} setSearch={setSearch} />
       {loading ? (
-        <h3>Loading...</h3>
+        <Loading />
       ) : (
         <div className={styles.recipes}>
           {recipes.map((recipe) => (
-            <Recipe props={recipe} key={recipe.id} />
+            <Recipe props={recipe} isLogin={isLogin} key={recipe.id} />
           ))}
         </div>
       )}

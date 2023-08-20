@@ -1,10 +1,61 @@
-import { useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaTrash } from "react-icons/fa";
 import styles from "../pages/Home.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
-function Recipe({ props }) {
-  const [like, setLike] = useState(false);
+function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
   const { id, image, title } = props;
+  console.log(props);
+
+  function handleAddFavourite() {
+    if (isLogin) {
+      async function saveRecipe() {
+        try {
+          const res = await axios.post(
+            "http://localhost:8000/recipe",
+            {
+              recipe_id: id,
+              image,
+              title,
+            },
+            { headers: { Authorization: `Bearer ${isLogin.token}` } }
+          );
+
+          if (res.data.status) {
+            toast.success(res.data.msg);
+          }
+        } catch (error) {
+          toast.error(error.response.data.msg);
+        }
+      }
+      saveRecipe();
+    } else {
+      toast.error("Please Login first to add favourite item");
+    }
+  }
+
+  function handleDelete() {
+    async function deleteRecipe() {
+      const res = await axios.delete(
+        `http://localhost:8000/recipe/${props._id}`,
+        {
+          headers: { Authorization: `Bearer ${isLogin.token}` },
+        }
+      );
+
+      if (res.data.status) {
+        setFavouriteRecipe((prevFavourite) =>
+          prevFavourite.filter((e) => e.recipe_id !== props.recipe_id)
+        );
+        toast.success(res.data.msg);
+      } else {
+        toast.error(res.data.msg);
+      }
+    }
+    deleteRecipe();
+  }
+
   return (
     <div className={styles.recipe_item}>
       <div className={styles.cont}>
@@ -14,13 +65,23 @@ function Recipe({ props }) {
 
         <h3 className="title">{title}</h3>
         <div className={styles.btns}>
-          <FaHeart
-            color={like ? "red" : "black"}
-            onClick={() => setLike(!like)}
-          />
+          {isFavourite ? (
+            <FaHeart
+              onClick={handleAddFavourite}
+              size="1.3rem"
+              className={styles.heart}
+            />
+          ) : (
+            <FaTrash
+              size="1.3rem"
+              className={styles.heart}
+              onClick={handleDelete}
+            />
+          )}
           <button className={styles.btn}>View Recipe</button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
