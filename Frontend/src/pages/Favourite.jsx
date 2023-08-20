@@ -5,6 +5,8 @@ import axios from "axios";
 import Recipe from "../components/Recipe";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import notFound from "../notFound.jpg";
+import Footer from "./Footer";
 
 function Favourite({ loading, setLoading, setSearch, isLogin, setIsLogin }) {
   const [favouriteRecipe, setFavouriteRecipe] = useState([]);
@@ -41,18 +43,25 @@ function Favourite({ loading, setLoading, setSearch, isLogin, setIsLogin }) {
       {loading ? (
         <Loading />
       ) : (
-        <div className={styles.recipes}>
-          {favouriteRecipe.map((recipe) => (
-            <Recipe
-              props={recipe}
-              isLogin={isLogin}
-              key={recipe.id}
-              isFavourite={false}
-              setFavouriteRecipe={setFavouriteRecipe}
-            />
-          ))}
-        </div>
+        <>
+          <div className={styles.recipes}>
+            {favouriteRecipe.map((recipe) => (
+              <Recipe
+                props={recipe}
+                isLogin={isLogin}
+                key={recipe.id}
+                isFavourite={false}
+                setFavouriteRecipe={setFavouriteRecipe}
+              />
+            ))}
+          </div>
+
+          {favouriteRecipe.length === 0 && (
+            <img className={styles.notFound} src={notFound} alt="Not Found" />
+          )}
+        </>
       )}
+      <Footer />
     </main>
   );
 }

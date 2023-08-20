@@ -21,7 +21,7 @@ const Navbar = ({ setSearch, showSearch = true, isLogin, setIsLogin }) => {
 
   return (
     <nav>
-      <Link to="/" className="title">
+      <Link to="/" onClick={() => setSearch("")} className="title">
         FoodieFoo
       </Link>
       {showSearch && (

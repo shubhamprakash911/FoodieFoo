@@ -46,7 +46,14 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route
           path="/recipe/:id"
-          element={<ViewRecipe isLogin={isLogin} setIsLogin={setIsLogin} />}
+          element={
+            <ViewRecipe
+              isLogin={isLogin}
+              setIsLogin={setIsLogin}
+              loading={loading}
+              setLoading={setLoading}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>

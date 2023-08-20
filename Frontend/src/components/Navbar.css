@@ -42,6 +42,10 @@ nav ul li .link:not(.active):hover {
   background-color: #172554;
 }
 
+.link {
+  cursor: pointer;
+}
+
 nav .menu {
   display: none;
   position: absolute;

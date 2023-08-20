@@ -15,17 +15,19 @@ export default function Login({ setIsLogin }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await axios.post(`http://localhost:8000/user/login`, {
-      email,
-      password,
-    });
+    try {
+      const res = await axios.post(`http://localhost:8000/user/login`, {
+        email,
+        password,
+      });
 
-    if (res.data.status) {
-      localStorage.setItem("userLogin", JSON.stringify(res.data));
-      setIsLogin(res.data);
-      navigate("/", { replace: true });
-    } else {
-      toast.error(res.data.msg, { position: toast.POSITION.TOP_CENTER });
+      if (res.data.status) {
+        localStorage.setItem("userLogin", JSON.stringify(res.data));
+        setIsLogin(res.data);
+        navigate("/", { replace: true });
+      }
+    } catch (error) {
+      toast.error(error.response.data.msg);
     }
   }
 

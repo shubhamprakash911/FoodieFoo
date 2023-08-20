@@ -24,34 +24,38 @@ function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
           );
 
           if (res.data.status) {
-            toast.success(res.data.msg, { position: "bottom-left" });
+            toast.success(res.data.msg, { position: "bottom-right" });
           }
         } catch (error) {
-          toast.error(error.response.data.msg);
+          toast.error(error.response.data.msg, { position: "bottom-right" });
         }
       }
       saveRecipe();
     } else {
-      toast.error("Please Login first to add favourite item");
+      toast.error("Please Login first to add favourite item", {
+        position: "bottom-right",
+      });
     }
   }
 
   function handleDelete() {
     async function deleteRecipe() {
-      const res = await axios.delete(
-        `http://localhost:8000/recipe/${props._id}`,
-        {
-          headers: { Authorization: `Bearer ${isLogin.token}` },
-        }
-      );
-
-      if (res.data.status) {
-        setFavouriteRecipe((prevFavourite) =>
-          prevFavourite.filter((e) => e.recipe_id !== props.recipe_id)
+      try {
+        const res = await axios.delete(
+          `http://localhost:8000/recipe/${props._id}`,
+          {
+            headers: { Authorization: `Bearer ${isLogin.token}` },
+          }
         );
-        toast.success(res.data.msg, { position: "bottom-right" });
-      } else {
-        toast.error(res.data.msg);
+
+        if (res.data.status) {
+          setFavouriteRecipe((prevFavourite) =>
+            prevFavourite.filter((e) => e.recipe_id !== props.recipe_id)
+          );
+          toast.success(res.data.msg, { position: "bottom-right" });
+        }
+      } catch (error) {
+        toast.error(error.response.data.msg, { position: "bottom-right" });
       }
     }
     deleteRecipe();

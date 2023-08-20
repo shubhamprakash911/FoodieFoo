@@ -14,17 +14,21 @@ function SignUp() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await axios.post(`http://localhost:8000/user/register`, {
-      username,
-      email,
-      password,
-    });
+    try {
+      const res = await axios.post(`http://localhost:8000/user/register`, {
+        username,
+        email,
+        password,
+      });
 
-    if (res.data.status) {
-      alert(res.data);
-      navigate("/login", { replace: true });
-    } else {
-      toast.error(res.data.msg);
+      if (res.data.status) {
+        alert(res.data.msg);
+        navigate("/login", { replace: true });
+      } else {
+        toast.error(res.data.msg);
+      }
+    } catch (error) {
+      toast.error(error.response.data.msg);
     }
   }
 
