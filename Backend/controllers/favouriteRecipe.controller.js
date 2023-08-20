@@ -30,7 +30,7 @@ async function addFavouriteRecipe(req, res) {
 async function getFavouriteRecipe(req, res) {
   try {
     const recipeData = await FavouriteRecipeModel.find({
-      _id: req.body.userId,
+      userId: req.body.userId,
     });
     res
       .status(200)
