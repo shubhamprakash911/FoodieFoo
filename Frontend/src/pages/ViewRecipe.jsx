@@ -27,7 +27,7 @@ function ViewRecipe({ isLogin, setIsLogin, setLoading, loading }) {
       }
     };
     fetchDetails();
-  }, [params.id]);
+  }, [params.id, setLoading]);
 
   return (
     <main>

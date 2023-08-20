@@ -21,7 +21,7 @@ function Favourite({ loading, setLoading, setSearch, isLogin, setIsLogin }) {
 
     async function getFavouriteRecipe() {
       setLoading(true);
-      const res = await axios.get(`http://localhost:8000/recipe`, {
+      const res = await axios.get(`https://foodiefoo.onrender.com/recipe`, {
         headers: { Authorization: `Bearer ${isLogin.token}` },
       });
       console.log(res.data.recipes);

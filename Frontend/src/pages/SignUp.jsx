@@ -15,11 +15,14 @@ function SignUp() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:8000/user/register`, {
-        username,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `https://foodiefoo.onrender.com/user/register`,
+        {
+          username,
+          email,
+          password,
+        }
+      );
 
       if (res.data.status) {
         alert(res.data.msg);

@@ -14,7 +14,7 @@ function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
       async function saveRecipe() {
         try {
           const res = await axios.post(
-            "http://localhost:8000/recipe",
+            "https://foodiefoo.onrender.com/recipe",
             {
               recipe_id,
               image,
@@ -42,7 +42,7 @@ function Recipe({ props, isLogin, isFavourite = true, setFavouriteRecipe }) {
     async function deleteRecipe() {
       try {
         const res = await axios.delete(
-          `http://localhost:8000/recipe/${props._id}`,
+          `https://foodiefoo.onrender.com/recipe/${props._id}`,
           {
             headers: { Authorization: `Bearer ${isLogin.token}` },
           }
